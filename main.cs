@@ -11,23 +11,26 @@ public class SudokuSolver : MonoBehaviour
     [SerializeField] private GameObject TilePrefab;
     [SerializeField] private RectTransform ParentPanel;
 
-
     void Start()
     {
-        SudokuGrid = new int[9, 9] { 
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9}, 
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9}, 
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9}, 
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9},
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9},
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9},
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9},
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9},
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9}, };
+        int[,] SudokuGrid = new int[,] {
+                { 0, 0, 0, 2, 6, 0, 7, 0, 1},
+                { 6, 8, 0, 0, 7, 0, 0, 9, 0},
+                { 1, 9, 0, 0, 0, 4, 5, 0, 0},
+                { 8, 2, 0, 1, 0, 0, 0, 4, 0},
+                { 0, 0, 4, 6, 0, 2, 9, 0, 0},
+                { 0, 5, 0, 0, 0, 3, 0, 2, 8},
+                { 0, 0, 9, 3, 0, 0, 0, 7, 4},
+                { 0, 4, 0, 0, 5, 0, 0, 3, 6},
+                { 7, 0, 3, 0, 1, 8, 0, 0, 0}
+            };
 
         GenerateGrid();
         // if SolveSudoku returns true
-        if(SolveSudoku(SolveSudoku, 0, 0)) console.WriteLine("Sudoku Board Completed.");
+        if(SolveSudoku(SudokuGrid, 0, 0)){
+            console.WriteLine("Sudoku Board Completed.");
+            print_board(SudokuGrid);
+        }
         // if SolveSudoku returns false
         else console.WriteLine("Sudoku can not be completed.");
     }
@@ -35,6 +38,7 @@ public class SudokuSolver : MonoBehaviour
     void GenerateGrid()
     {
         SudokuVisualGrid = new GameObject[9, 9];
+
         for (int x = 0; x < 9; ++x)
         {
             for (int y = 0; y < 9; ++y)
@@ -74,6 +78,7 @@ public class SudokuSolver : MonoBehaviour
                 sudoku[row,column] = 0;
             }
         }
+        //if returns false, unable to solve sudoku board
         return false;
     }
 
@@ -99,12 +104,37 @@ public class SudokuSolver : MonoBehaviour
         return true;
     }
     
-    bool SubSquareConstraint(int[,] sudoku)
+    bool SubSquareConstraint(int[,] sudoku, int row, int column)
     {
-        
+        int x = row / 3;
+        int y = column / 3;
+        for(int i = 0; i < 3; ++i){
+            for(int j = 0; j < 3; ++j){
+                return false;
+            }
+        }
+        return true;
+    }
+
+      void print_board(int[,] board){
+        for(int i = 0; i < 9; ++i){
+            if(i % 3 == 0 && i != 0){
+                Console.WriteLine("- - - - - - - - - - - - - ");
+            }
+            for(int j = 0; j < 9; ++j){
+                if(j % 3 == 0 && j != 0)
+                {
+                    Console.Write(" | ");
+                }
+                if(j == 0)
+                    Console.Write(board[i,j]);
+                else
+                    Console.Write(board[i,j] + " ");
+                
+            }
+        }
     }
     //
     ////////////////////////////////////////////////////////////////////////////
 
 }
-
