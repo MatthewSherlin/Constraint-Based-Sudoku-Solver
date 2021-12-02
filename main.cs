@@ -56,10 +56,13 @@ public class SudokuSolver : MonoBehaviour
     void SolveSudoku(int[,] sudoku, int row, int column)
     {
         //if column becomes 9, move to next row and reset column
-        if(column == 9){
-            row += 1;
-            column = 0;
-        }
+            if (column == 9)
+            {
+                row += 1;
+                if (row == 9) return true;
+                column = 0;
+
+            }
         //if current index contains 0, go to next column
         if(sudoku[row, column] != 0){
             return SolveSudoku(sudoku, row, ++column);
@@ -70,7 +73,6 @@ public class SudokuSolver : MonoBehaviour
             //if constraints pass, index is equal to number in for loop
             if(RowConstraint(sudoku, row, i) && ColConstraint(sudoku, column, i) && SubSquareConstraint(sudoku)){
                 sudoku[row,column] = i;
-                //check for next possibility
                 if(SolveSudoku(sudoku, row, column+1)) return true;
             }
             else{
@@ -104,6 +106,7 @@ public class SudokuSolver : MonoBehaviour
         return true;
     }
     
+    /////////need to fix
     bool SubSquareConstraint(int[,] sudoku, int row, int column)
     {
         int x = row / 3;
