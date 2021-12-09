@@ -12,8 +12,8 @@ namespace SudokuSolver
                 {0, 7, 4, 0, 8, 0, 0, 0, 0}, 
                 {0, 0, 0, 0, 0, 3, 0, 0, 2}, 
                 {0, 8, 0, 0, 4, 0, 0, 1, 0}, 
-                {6, 0, 0, 5, 0, 0, 0, 0, 0}, 
-                {0, 0, 0, 0, 1, 0, 7, 8, 0}, 
+                {0, 0, 0, 5, 0, 0, 0, 0, 0}, 
+                {0, 0, 0, 0, 1, 0, 7, 0, 0}, 
                 {5, 0, 0, 0, 0, 9, 0, 0, 0}, 
                 {0, 0, 0, 0, 0, 0, 0, 4, 0}
             };
@@ -22,7 +22,7 @@ namespace SudokuSolver
                 Console.WriteLine("Sudoku can not be solved.");
             }
             else{
-                if (SolveSudoku(SudokuGrid, -1, -1))
+                if (SolveSudoku(SudokuGrid, 0, 0))
             {
                 Console.WriteLine("Sudoku Board Completed.");
                 print_board(SudokuGrid);
