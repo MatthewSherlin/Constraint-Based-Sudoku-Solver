@@ -51,10 +51,8 @@ namespace SudokuSolver
             }
             if (!filled) break;
         }
- 
         // if there are no empty spaces left, then return true
         if (filled) return true;
-
         //size of rows and columns
         for (int i = 1; i <= 9; i++){
             //if constraints pass, index is equal to number in for loop
