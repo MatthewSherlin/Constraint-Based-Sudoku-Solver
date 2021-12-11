@@ -1,6 +1,6 @@
 # ConstraintBasedSudokuSolver
 
-Final Project for KSU CS-44201
+## Final Project for KSU CS-44201
 
 Abstract:
 
