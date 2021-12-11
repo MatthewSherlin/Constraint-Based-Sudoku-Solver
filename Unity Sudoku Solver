@@ -79,8 +79,7 @@ public class SudokuSolver : MonoBehaviour
 
     void Start()
     {
-        Random.seed = 42;
-
+        Random.InitState((int)System.DateTime.Now.Ticks);
         NewGrid();
     }
 
